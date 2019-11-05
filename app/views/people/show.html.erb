@@ -1,1 +1,13 @@
 <h1><%= @person.first_name %> <%= @person.last_name %></h1>
+<h2>Addresses:</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Kind</th>
+            <th>Street</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render @person.addresses %>
+    </tbody>
+</table>    
