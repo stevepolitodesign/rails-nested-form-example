@@ -15,7 +15,7 @@ RSpec.feature "PersonFlows", type: :feature do
   end
   describe "show page" do
     let(:person) { FactoryBot.create(:person) }
-    it "diplays person's first and last name" do
+    it "displays person's first and last name" do
       visit person_path(person)
       expect(page).to have_content(person.first_name)
       expect(page).to have_content(person.last_name)
@@ -58,7 +58,6 @@ RSpec.feature "PersonFlows", type: :feature do
       fill_in("First name", with: "")
       fill_in("Last name", with: "")
       click_button("Create Person")
-      puts(page.html)
       expect(page).to have_content("prohibited this form from saving.")
     end
   end
