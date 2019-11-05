@@ -8,10 +8,11 @@
     Addresses:
     <ul>
         <%= f.fields_for :addresses do |addresses_form| %>
-        <li>
-            <%= render "address_fields", f: addresses_form %>
-        </li>
+            <li>
+                <%= render "address_fields", f: addresses_form %>
+            </li>
         <% end %>
+        <%= link_to_add_fields "Add Addresses", f, :addresses %>
     </ul>
 
     <%= f.submit %>
