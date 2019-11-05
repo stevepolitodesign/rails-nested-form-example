@@ -1,4 +1,5 @@
 require 'capybara/rspec'
+require 'database_cleaner'
 
 RSpec.configure do |config|
 
@@ -45,4 +46,4 @@ RSpec.configure do |config|
       DatabaseCleaner.clean
     end
   
-end
+  end
