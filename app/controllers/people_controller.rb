@@ -8,6 +8,7 @@ class PeopleController < ApplicationController
 
     def new
         @person = Person.new
+        2.times { @person.addresses.build }
     end
 
     def create
@@ -45,6 +46,6 @@ class PeopleController < ApplicationController
         end
 
         def person_params
-            params.require(:person).permit(:first_name, :last_name)
+            params.require(:person).permit(:first_name, :last_name, addresses_attributes: [:id, :kind, :street, :_destroy])
         end
 end

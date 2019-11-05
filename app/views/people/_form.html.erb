@@ -4,6 +4,21 @@
     <%= f.text_field :first_name %>
     <%= f.label :last_name %>
     <%= f.text_field :last_name %>
+
+    Addresses:
+    <ul>
+        <%= f.fields_for :addresses do |addresses_form| %>
+        <li>
+            <%= addresses_form.check_box :_destroy %>
+            <%= addresses_form.label :kind %>
+            <%= addresses_form.text_field :kind %>
+    
+            <%= addresses_form.label :street %>
+            <%= addresses_form.text_field :street %>
+        </li>
+        <% end %>
+    </ul>
+
     <%= f.submit %>
     <% if params[:action] === "edit" && params[:controller] === "people" %>
         <%= link_to "Delete Person", person_path(@person), method: :delete, data: { confirm: "Are You Sure?" } %>
