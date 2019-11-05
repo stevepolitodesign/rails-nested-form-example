@@ -19,11 +19,13 @@ RSpec.describe Person, type: :model do
     end    
   end
   describe "associated addresses" do
+    let!(:person_with_addresses) { FactoryBot.build(:person_with_addresses) }
     it "can have many addresses" do
-      skip
+      expect(described_class.reflect_on_association(:addresses).macro).to eq(:has_many)
     end
     it "destroys associated addresses when destroyed" do
-      skip
+      address_count = person_with_addresses.addresses.count
+      expect { person_with_addresses.destroy }.to change { Address.count }.by(-address_count)
     end    
   end
 end
