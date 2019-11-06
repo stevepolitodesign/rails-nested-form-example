@@ -1,5 +1,5 @@
 <div>
-    <%= f.check_box :_destroy %>
+    <%= f.hidden_field :_destroy %>
     <div>
         <%= f.label :kind %>
         <%= f.text_field :kind %>
@@ -7,5 +7,8 @@
     <div>
         <%= f.label :street %>
         <%= f.text_field :street %>
+    </div>
+    <div>
+        <%= link_to "Remove", '#', class: "remove_fields" %>
     </div>
 </div>
