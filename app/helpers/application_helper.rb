@@ -9,7 +9,8 @@ module ApplicationHelper
         new_object = f.object.send(association).klass.new
 
         # Saves the unique ID of the object into a variable. 
-        # This is needed to ensure the key of the associated array is unique
+        # This is needed to ensure the key of the associated array is unique and to be used later in javascript
+        # We could use another method to achive this
         id = new_object.object_id
 
         # https://api.rubyonrails.org/ fields_for(record_name, record_object = nil, fields_options = {}, &block) 
