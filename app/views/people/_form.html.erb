@@ -5,15 +5,13 @@
     <%= f.label :last_name %>
     <%= f.text_field :last_name %>
 
-    Addresses:
-    <ul>
+    <fieldset>
+        <legend>Addresses:</legend>
         <%= f.fields_for :addresses do |addresses_form| %>
-            <li>
-                <%= render "address_fields", f: addresses_form %>
-            </li>
+            <%= render "address_fields", f: addresses_form %> 
         <% end %>
         <%= link_to_add_fields "Add Addresses", f, :addresses %>
-    </ul>
+    </fieldset>
 
     <%= f.submit %>
     <% if params[:action] === "edit" && params[:controller] === "people" %>
