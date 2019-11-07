@@ -9,7 +9,8 @@ RSpec.feature "PersonFlows", type: :feature do
       Person.all.count do |person|
         expect(page).to have_content(person.first_name)
         expect(page).to have_content(person.last_name)
-        expect(page).to have_link("See More", href: person_path(person))
+        expect(page).to have_link("View Peron", href: person_path(person))
+        expect(page).to have_link("Edit Person", href: edit_person_path(person))
       end
     end
   end
@@ -19,6 +20,9 @@ RSpec.feature "PersonFlows", type: :feature do
       visit person_path(person)
       expect(page).to have_content(person.first_name)
       expect(page).to have_content(person.last_name)
+    end
+    it "displays a list of associated addresses" do
+      skip
     end
   end
   describe "edit page" do
