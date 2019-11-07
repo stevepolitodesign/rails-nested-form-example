@@ -17,9 +17,5 @@ RSpec.describe Address, type: :model do
       address.street = nil
       expect(address).to_not be_valid
     end
-    it "should have a person" do
-      address.person = nil
-      expect(address).to_not be_valid
-    end 
   end
 end

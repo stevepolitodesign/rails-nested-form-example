@@ -15,14 +15,19 @@ RSpec.feature "PersonFlows", type: :feature do
     end
   end
   describe "show page" do
-    let(:person) { FactoryBot.create(:person) }
+    let!(:person) { FactoryBot.create(:person) }
+    let!(:person_with_addresses) { FactoryBot.create(:person_with_addresses) }
     it "displays person's first and last name" do
       visit person_path(person)
       expect(page).to have_content(person.first_name)
       expect(page).to have_content(person.last_name)
     end
     it "displays a list of associated addresses" do
-      skip
+      visit person_path(person_with_addresses)
+      person_with_addresses.addresses.each do |address|
+        expect(page).to have_content(address.kind)
+        expect(page).to have_content(address.street)
+      end
     end
   end
   describe "edit page" do
