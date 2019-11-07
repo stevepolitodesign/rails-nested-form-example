@@ -35,6 +35,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
   gem 'capybara', '~> 3.29'
   gem 'faker', '~> 2.7'
+  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.6'
 end
 
 group :development do
