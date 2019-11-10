@@ -21,7 +21,7 @@ module ApplicationHelper
         # record_name = :addresses
         # record_object = new_object
         # fields_options = { child_index: id }
-            # 1child_index` is used to ensure the key of the associated array is unique, and that it matched the value in the `data-id` attribute.
+            # child_index` is used to ensure the key of the associated array is unique, and that it matched the value in the `data-id` attribute.
             # `person[addresses_attributes][child_index_value][_destroy]`
         fields = f.fields_for(association, new_object, child_index: id) do |builder|
             
