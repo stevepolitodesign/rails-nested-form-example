@@ -29,7 +29,7 @@ end
 ## 3. Create a Form Partial
 
 ```erb
-<%# _address_fields.html.erb %>
+<%# app/views/people/_address_fields.html.erb %>
 <div class="nested-fields">
     <%= f.hidden_field :_destroy %>
     <div>
