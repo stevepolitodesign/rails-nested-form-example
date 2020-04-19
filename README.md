@@ -13,7 +13,7 @@ class Person < ApplicationRecord
 end
 ```
 
-## 2. Declare the Permitted Parameters 
+## 2. Declare the Permitted Parameters
 
 ```ruby
 class PeopleController < ApplicationController
@@ -53,7 +53,7 @@ end
     <fieldset>
         <legend>Addresses:</legend>
         <%= f.fields_for :addresses do |addresses_form| %>
-            <%= render "address_fields", f: addresses_form %> 
+            <%= render "address_fields", f: addresses_form %>
         <% end %>
         <%= link_to_add_fields "Add Addresses", f, :addresses %>
     </fieldset>
@@ -73,7 +73,7 @@ module ApplicationHelper
         fields = f.fields_for(association, new_object, child_index: id) do |builder|
             render(association.to_s.singularize + "_fields", f: builder)
         end
-        link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")}) 
+        link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
     end
 end
 ```
@@ -83,67 +83,64 @@ end
 ```javascript
 // app/javascript/packs/nested-forms/addFields.js
 class addFields {
-    constructor(){
-        this.links = document.querySelectorAll('.add_fields');
-        this.iterateLinks();
-    }
+  constructor() {
+    this.links = document.querySelectorAll(".add_fields");
+    this.iterateLinks();
+  }
 
-    iterateLinks() {
-        if(this.links.length === 0) return;
-        this.links.forEach((link)=>{
-            link.addEventListener('click', (e) => {
-                this.handleClick(link, e);
-            });
-        });
-    }
+  iterateLinks() {
+    if (this.links.length === 0) return;
+    this.links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        this.handleClick(link, e);
+      });
+    });
+  }
 
-    handleClick(link, e) {
-        if (!link || !e) return;
-        e.preventDefault();
-        let time = new Date().getTime();
-        let linkId = link.dataset.id;
-        let regexp = linkId ? new RegExp(linkId, 'g') : null ;
-        let newFields = regexp ? link.dataset.fields.replace(regexp, time) : null ;
-        newFields ? link.insertAdjacentHTML('beforebegin', newFields) : null ;
-    }
-
+  handleClick(link, e) {
+    if (!link || !e) return;
+    e.preventDefault();
+    let time = new Date().getTime();
+    let linkId = link.dataset.id;
+    let regexp = linkId ? new RegExp(linkId, "g") : null;
+    let newFields = regexp ? link.dataset.fields.replace(regexp, time) : null;
+    newFields ? link.insertAdjacentHTML("beforebegin", newFields) : null;
+  }
 }
 
-window.addEventListener('turbolinks:load', () => new addFields() );
+window.addEventListener("turbolinks:load", () => new addFields());
 ```
 
 ```javascript
 // app/javascript/packs/nested-forms/removeFields.js
 class removeFields {
+  constructor() {
+    this.iterateLinks();
+  }
 
-    constructor(){
-        this.links = document.querySelectorAll('.remove_fields');
-        this.iterateLinks();
+  iterateLinks() {
+    document.addEventListener("click", (e) => {
+      if (e.target && e.target.className == "remove_fields") {
+        this.handleClick(e.target, e);
+      }
+    });
+  }
+
+  handleClick(link, e) {
+    if (!link || !e) return;
+    e.preventDefault();
+    let fieldParent = link.closest(".nested-fields");
+    let deleteField = fieldParent
+      ? fieldParent.querySelector('input[type="hidden"]')
+      : null;
+    if (deleteField) {
+      deleteField.value = 1;
+      fieldParent.style.display = "none";
     }
-
-    iterateLinks() {
-        if(this.links.length === 0) return;
-        this.links.forEach((link)=>{
-            link.addEventListener('click', (e) => {
-                this.handleClick(link, e);
-            });
-        });
-    }
-
-    handleClick(link, e) {
-        if (!link || !e) return;
-        e.preventDefault();
-        let fieldParent = link.closest('.nested-fields');
-        let deleteField = fieldParent ? fieldParent.querySelector('input[type="hidden"]') : null
-        if (deleteField) {
-            deleteField.value = 1;
-            fieldParent.style.display = 'none';
-        }
-    }
-
+  }
 }
 
-window.addEventListener('turbolinks:load', () => new removeFields() );
+window.addEventListener("turbolinks:load", () => new removeFields());
 ```
 
 ```javascript
